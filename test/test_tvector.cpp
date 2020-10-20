@@ -31,12 +31,24 @@ TEST(TVector, can_create_copied_vector)
 
 TEST(TVector, copied_vector_is_equal_to_source_one)
 {
-  ADD_FAILURE();
+	TVector<int> v(5);
+	for (int i = 0; i < v.GetSize(); i++)
+	{
+		v[i] = i;
+	}
+
+	TVector<int> v1(v);
+
+	EXPECT_EQ(v, v1);
 }
 
 TEST(TVector, copied_vector_has_its_own_memory)
 {
-  ADD_FAILURE();
+	TVector<int> v(5);
+
+	TVector<int> v1(v);
+
+	EXPECT_NE(&(v[0]), &(v1[0]));
 }
 
 TEST(TVector, can_get_size)
@@ -63,22 +75,39 @@ TEST(TVector, can_set_and_get_element)
 
 TEST(TVector, throws_when_set_element_with_negative_index)
 {
-  ADD_FAILURE();
+	TVector<int> v(5);
+
+	ASSERT_ANY_THROW(v[-1] = 1);
 }
 
 TEST(TVector, throws_when_set_element_with_too_large_index)
 {
-  ADD_FAILURE();
+	TVector<int> v(5);
+
+	ASSERT_ANY_THROW(v[5] = 1);
 }
 
 TEST(TVector, can_assign_vector_to_itself)
 {
-  ADD_FAILURE();
+	TVector<int> v(5);
+	ASSERT_NO_THROW(v = v);
 }
 
 TEST(TVector, can_assign_vectors_of_equal_size)
 {
-  ADD_FAILURE();
+	TVector<int> v1(5);
+	TVector<int> v2(5);
+
+	TVector<int> v3(5);
+
+	for (int i = 0; i < v1.GetSize(); i++)
+	{
+		v1[i] = i;
+		v2[i] = v1.GetSize() - 1 - i;
+		v3[i] = 4;
+	}
+
+	EXPECT_EQ(v3, v2 + v1);
 }
 
 TEST(TVector, assign_operator_change_vector_size)
