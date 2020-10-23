@@ -96,7 +96,12 @@ TEST(TVector, can_assign_vector_to_itself)
 TEST(TVector, can_assign_vectors_of_equal_size)
 {
 	TVector<int> v1(5), v2(5);
-	EXPECT_EQ(v1.GetSize(), v2.GetSize());
+	for (int i = 0; i < v1.GetSize(); i++)
+	{
+		v1[i] = i;
+	}
+	v2 = v1;
+	EXPECT_EQ(v1, v2);
 }
 
 TEST(TVector, assign_operator_change_vector_size)
@@ -108,8 +113,13 @@ TEST(TVector, assign_operator_change_vector_size)
 
 TEST(TVector, can_assign_vectors_of_different_size)
 {
-	TVector<int> v1(5), v2(7);
-	EXPECT_NE(v1.GetSize(), v2.GetSize());
+	TVector<int> v1(5), v2(5);
+	for (int i = 0; i < v1.GetSize(); i++)
+	{
+		v1[i] = i;
+	}
+	v2 = v1;
+	EXPECT_EQ(v1, v2);
 }
 
 TEST(TVector, compare_equal_vectors_return_true)

@@ -23,89 +23,176 @@ TEST(TMatrix, can_create_copied_matrix)
 
   ASSERT_NO_THROW(TMatrix<int> m1(m));
 }
-/*
+
 TEST(TMatrix, copied_matrix_is_equal_to_source_one)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5);
+
+	for (int i = 0; i < m.GetSize(); i++)
+	{
+		for (int j = i; j < m.GetSize(); j++)
+		{
+			m[i][j] = i + j;
+		}
+	}
+
+	TMatrix<int> m1(m);
+
+	EXPECT_EQ(m, m1);
 }
 
 TEST(TMatrix, copied_matrix_has_its_own_memory)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5);
+	TMatrix<int> m1(m);
+	EXPECT_NE(&(m[0][0]), &(m1[0][0]));
 }
 
 TEST(TMatrix, can_get_size)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5);
+	EXPECT_EQ(5, m.GetSize());
 }
 
 TEST(TMatrix, can_set_and_get_element)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5);
+	m[0][0] = 9;
+	EXPECT_EQ(9, m[0][0]);
 }
 
 TEST(TMatrix, throws_when_set_element_with_negative_index)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5);
+
+	ASSERT_ANY_THROW(m[-1][-1] = 5);
 }
 
 TEST(TMatrix, throws_when_set_element_with_too_large_index)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5);
+
+	ASSERT_ANY_THROW(m[5][5] = 5);
 }
 
 TEST(TMatrix, can_assign_matrix_to_itself)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5);
+	ASSERT_NO_THROW(m = m);
 }
 
 TEST(TMatrix, can_assign_matrices_of_equal_size)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5), m1(5);
+
+	for (int i = 0; i < m.GetSize(); i++)
+	{
+		for (int j = i; j < m.GetSize(); j++)
+		{
+			m[i][j] = i + j;
+		}
+	}
+	
+	m1 = m;
+	EXPECT_EQ(m, m1);
 }
 
 TEST(TMatrix, assign_operator_change_matrix_size)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(7), m1(5);
+	m = m1;
+	EXPECT_EQ(5, m.GetSize());
 }
 
 TEST(TMatrix, can_assign_matrices_of_different_size)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(7), m1(5);
+
+	for (int i = 0; i < m.GetSize(); i++)
+	{
+		for (int j = i; j < m.GetSize(); j++)
+		{
+			m[i][j] = i + j;
+		}
+	}
+
+	m1 = m;
+	EXPECT_EQ(m, m1);
 }
 
 TEST(TMatrix, compare_equal_matrices_return_true)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5), m1(5);
+	for (int i = 0; i < m.GetSize(); i++)
+	{
+		for (int j = i; j < m.GetSize(); j++)
+		{
+			m[i][j] = i + j;
+			m1[i][j] = i + j;
+		}
+	}
+
+	EXPECT_EQ(true, m == m1);
 }
 
 TEST(TMatrix, compare_matrix_with_itself_return_true)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5);
+	for (int i = 0; i < m.GetSize(); i++)
+	{
+		for (int j = i; j < m.GetSize(); j++)
+		{
+			m[i][j] = i + j;
+		}
+	}
+
+	EXPECT_EQ(true, m == m);
 }
 
 TEST(TMatrix, matrices_with_different_size_are_not_equal)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5), m1(7);
+	EXPECT_NE(false, m != m1);
 }
 
 TEST(TMatrix, can_add_matrices_with_equal_size)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5), m1(5), m2(5);
+	for (int i = 0; i < m.GetSize(); i++)
+	{
+		for (int j = i; j < m.GetSize(); j++)
+		{
+			m[i][j] = i;
+			m1[i][j] = m.GetSize() - i;
+			m2[i][j] = m.GetSize();
+		}
+	}
+	EXPECT_EQ(m2, m + m1);
 }
 
 TEST(TMatrix, cant_add_matrices_with_not_equal_size)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5), m1(7);
+	ASSERT_ANY_THROW(m + m1);
 }
 
 TEST(TMatrix, can_subtract_matrices_with_equal_size)
 {
-  ADD_FAILURE();
+	TMatrix<int> m(5), m1(5), m2(5);
+	for (int i = 0; i < m.GetSize(); i++)
+	{
+		for (int j = i; j < m.GetSize(); j++)
+		{
+			m[i][j] = i;
+			m1[i][j] = i;
+		}
+	}
+	EXPECT_EQ(m2, m - m1);
 }
 
 TEST(TMatrix, cant_subtract_matrixes_with_not_equal_size)
 {
-  ADD_FAILURE();
-}*/
+	TMatrix<int> m(5), m1(7);
+	ASSERT_ANY_THROW(m - m1);
+}
 
