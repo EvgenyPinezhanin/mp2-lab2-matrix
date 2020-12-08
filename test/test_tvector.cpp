@@ -204,6 +204,20 @@ TEST(TVector, can_add_vectors_with_equal_size)
 	EXPECT_EQ(v3, v2 + v1);
 }
 
+TEST(TVector, can_add_vectors_with_equal_size_2)
+{
+	TVector<int> v1(5);
+	TVector<int> v2(5);
+
+	TVector<int> v3(5);
+
+	v1[0] = 1; v1[1] = 5; v1[2] = 7; v1[3] = 5; v1[4] = 5;
+	v2[0] = 8; v2[1] = 4; v2[2] = 0; v2[3] = 8; v2[4] = 5;
+	v3[0] = 9; v3[1] = 9; v3[2] = 7; v3[3] = 13; v3[4] = 10;
+
+	EXPECT_EQ(v3, v2 + v1);
+}
+
 TEST(TVector, cant_add_vectors_with_not_equal_size)
 {
 	TVector<int> v1(5);

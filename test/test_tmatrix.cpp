@@ -170,6 +170,23 @@ TEST(TMatrix, can_add_matrices_with_equal_size)
 	EXPECT_EQ(m2, m + m1);
 }
 
+TEST(TMatrix, can_add_matrices_with_equal_size_2)
+{
+	TMatrix<int> m(3), m1(3), m2(3);
+	m[0][0] = 5; m[0][1] = 4; m[0][2] = 2;
+	m[1][1] = 15; m[1][2] = 45;
+	m[2][2] = 51;
+
+	m1[0][0] = 52; m1[0][1] = 19; m1[0][2] = 1;
+	m1[1][1] = 0; m1[1][2] = 4;
+	m1[2][2] = 2;
+
+	m2[0][0] = 57; m2[0][1] = 23; m2[0][2] = 3;
+	m2[1][1] = 15; m2[1][2] = 49;
+	m2[2][2] = 53;
+	EXPECT_EQ(m2, m + m1);
+}
+
 TEST(TMatrix, cant_add_matrices_with_not_equal_size)
 {
 	TMatrix<int> m(5), m1(7);
